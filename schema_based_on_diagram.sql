@@ -61,7 +61,7 @@ ALTER TABLE invoice_items
 ADD FOREIGN KEY (treatment_id) REFERENCES treatments(id);
 
 ALTER TABLE invoice_items
-ADD FOREIGN KEY (treatment_id) REFERENCES medical_histories(id);
+ADD FOREIGN KEY (invoice_id) REFERENCES medical_histories(id);
 
 COMMIT;
 
