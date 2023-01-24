@@ -43,6 +43,13 @@ ALTER TABLE invoice_items
 ADD FOREIGN KEY (treatment_id) REFERENCES medical_histories(id);
 
 -- Indexes
+
+CREATE INDEX invoice_items_index ON invoice_items(id DESC);
+CREATE INDEX treatments_index ON treatments(id DESC);
+CREATE INDEX medical_histories_index ON medical_histories(id DESC);
+CREATE INDEX patients_index ON patients(id DESC);
+CREATE INDEX invoices_index ON invoices(id DESC);
+
 CREATE INDEX medical_histories_id_index ON medical_histories_and_treatments_junction_table(medical_histories_id DESC);
 CREATE INDEX treatments_id_index ON medical_histories_and_treatments_junction_table(treatments_id DESC);
 
