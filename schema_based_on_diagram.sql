@@ -36,3 +36,35 @@ CREATE TABLE invoices (
   payed_at TIMESTAMP,
   medical_history_id INTEGER
 )
+
+/* Set Foreign Keys */
+
+/* medical_histories */
+
+BEGIN;
+
+ALTER TABLE medical_histories
+ADD FOREIGN KEY (patient_id) REFERENCES patients(id);
+
+ALTER TABLE medical_histories
+ADD FOREIGN KEY (id) REFERENCES treatments(id);
+
+COMMIT;
+
+/* invoice_items */
+
+BEGIN;
+
+ALTER TABLE invoice_items
+ADD FOREIGN KEY (treatment_id) REFERENCES treatments(id);
+
+COMMIT;
+
+/* invoices */
+
+BEGIN;
+
+ALTER TABLE invoices
+ADD FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id);
+
+COMMIT;
