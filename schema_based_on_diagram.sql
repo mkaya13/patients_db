@@ -37,21 +37,15 @@ CREATE TABLE invoices (
   medical_history_id INTEGER
 )
 
+CREATE TABLE medical_histories_and_treatments_junction_table (
+  medical_histories_id INTEGER,
+  treatments_id INTEGER
+)
+
 /* Create the junction table for medical_histories and treatments */
 
 ALTER TABLE invoice_items
 ADD FOREIGN KEY (treatment_id) REFERENCES medical_histories(id);
-
--- Indexes
-
-CREATE INDEX invoice_items_index ON invoice_items(id DESC);
-CREATE INDEX treatments_index ON treatments(id DESC);
-CREATE INDEX medical_histories_index ON medical_histories(id DESC);
-CREATE INDEX patients_index ON patients(id DESC);
-CREATE INDEX invoices_index ON invoices(id DESC);
-
-CREATE INDEX medical_histories_id_index ON medical_histories_and_treatments_junction_table(medical_histories_id DESC);
-CREATE INDEX treatments_id_index ON medical_histories_and_treatments_junction_table(treatments_id DESC);
 
 /* Set Foreign Keys */
 
@@ -84,3 +78,12 @@ ALTER TABLE invoices
 ADD FOREIGN KEY (medical_history_id) REFERENCES medical_histories(id);
 
 COMMIT;
+
+/* Indexes for the Foreign Keys */
+
+CREATE INDEX medical_histories_index ON medical_histories(patient_id DESC);
+CREATE INDEX treatment_id_index ON invoice_items(treatment_id DESC);
+CREATE INDEX invoice_id_index ON invoice_items(invoice_id DESC);
+CREATE INDEX medical_history_id_index ON invoices(medical_history_id DESC);
+CREATE INDEX medical_histories_id_index ON medical_histories_and_treatments_junction_table(medical_histories_id DESC);
+
